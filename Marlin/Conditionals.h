@@ -32,6 +32,8 @@
       #define DEFAULT_LCD_CONTRAST 40
     #elif ENABLED(ELB_FULL_GRAPHIC_CONTROLLER)
       #define DEFAULT_LCD_CONTRAST 110
+      #define LCD_CONTRAST_MIN 90
+      #define LCD_CONTRAST_MAX 130
       #define U8GLIB_LM6059_AF
     #endif
 
@@ -194,17 +196,27 @@
   /**
   * Default LCD contrast for dogm-like LCD displays
   */
-  #if ENABLED(DOGLCD) && DISABLED(DEFAULT_LCD_CONTRAST)
+  #if ENABLED(DOGLCD) && !defined(DEFAULT_LCD_CONTRAST)
     #define DEFAULT_LCD_CONTRAST 32
   #endif
 
   #if ENABLED(DOGLCD)
     #define HAS_LCD_CONTRAST
+    
     #if ENABLED(U8GLIB_ST7920)
       #undef HAS_LCD_CONTRAST
     #endif
     #if ENABLED(U8GLIB_SSD1306)
       #undef HAS_LCD_CONTRAST
+    #endif
+    
+    #if ENABLED(HAS_LCD_CONTRAST)
+      #if !defined(LCD_CONTRAST_MIN)
+        #define LCD_CONTRAST_MIN 0
+      #endif
+      #if !defined(LCD_CONTRAST_MAX)
+        #define LCD_CONTRAST_MAX 63
+      #endif
     #endif
   #endif
 

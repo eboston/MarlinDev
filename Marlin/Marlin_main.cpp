@@ -4305,7 +4305,7 @@ inline void gcode_M240() {
  * M250: Read and optionally set the LCD contrast
  */
 inline void gcode_M250() {
-  if (code_seen('C')) lcd_setcontrast(code_value_short() & 0x3F);
+  if (code_seen('C')) lcd_setcontrast(code_value_short());
   SERIAL_PROTOCOLPGM("lcd contrast value: ");
   SERIAL_PROTOCOL(lcd_contrast);
   SERIAL_EOL;

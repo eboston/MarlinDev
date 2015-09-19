@@ -1163,13 +1163,9 @@ static void lcd_control_volumetric_menu() {
 #if ENABLED(HAS_LCD_CONTRAST)
 static void lcd_set_contrast() {
   if (encoderPosition != 0) {
-#if ENABLED(U8GLIB_LM6059_AF)
     lcd_contrast += encoderPosition;
-    lcd_contrast &= 0xFF;
-#else
-    lcd_contrast -= encoderPosition;
-    lcd_contrast &= 0x3F;
-#endif
+    lcd_contrast = constrain(lcd_contrast, LCD_CONTRAST_MIN, LCD_CONTRAST_MAX);
+
     encoderPosition = 0;
     lcdDrawUpdate = 1;
     u8g.setContrast(lcd_contrast);
@@ -1688,7 +1684,7 @@ void lcd_reset_alert_level() { lcd_status_message_level = 0; }
 
 #if ENABLED(HAS_LCD_CONTRAST)
 void lcd_setcontrast(uint8_t value) {
-  lcd_contrast = value & 0x3F;
+  lcd_contrast = value;
   u8g.setContrast(lcd_contrast);
 }
 #endif
