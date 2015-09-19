@@ -294,9 +294,7 @@
   // You can get round this by connecting a push button or single throw switch to the pin defined as SD_DETECT_PIN
   // in the pins.h file.  When using a push button pulling the pin to ground this will need inverted.  This setting should
   // be commented out otherwise
-  #ifndef ELB_FULL_GRAPHIC_CONTROLLER
-    #define SD_DETECT_INVERTED
-  #endif
+  //#define SD_DETECT_INVERTED
 
   #define SD_FINISHED_STEPPERRELEASE true  //if sd support and the file is finished: disable steppers?
   #define SD_FINISHED_RELEASECOMMAND "M84 X Y Z E" // You might want to keep the z enabled so your bed stays in place.
